@@ -1,0 +1,22 @@
+.active {
+  color: darkred;
+  outline: none;
+}
+
+.card {
+  box-shadow: 5px 5px black;
+  padding: 5px;
+  transition: box-shadow 0.25s ease-in;
+  margin-bottom: 30px;
+}
+  .card:active {
+    outline: none;
+  }
+  .card:hover {
+    box-shadow: 10px 10px 10px black;
+    cursor: pointer;
+  }
+
+h1 {
+  font-size: 24px;
+}

@@ -1,0 +1,17 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.layout aside {
+  flex-basis: 20%;
+  padding: 20px;
+}
+
+.layout > section {
+  flex-grow: 1;
+  padding: 30px;
+}
