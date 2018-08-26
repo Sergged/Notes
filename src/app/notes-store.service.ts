@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {INote} from './inote';
 import {NewNote} from './new-note';
+import {RemoteNotesService} from './remote-notes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,27 @@ import {NewNote} from './new-note';
 export class NotesStoreService {
 
   private _idActivatedByNoteDetails;
-  private notes = [
-    {headline: 'Youki', content: 'Bla'},
-    {headline: 'Naoikb', content: 'Nha'},
-    {headline: 'Boolkso', content: 'Glu'},
-    {headline: 'Joll', content: 'Kola'}
+  constructor(private route: ActivatedRoute, private router: Router, private remote: RemoteNotesService) {}
+
+  // Primary store for Notes
+  public notes = [
+    {headline: 'Google', content: 'bla-bla-bla', isDone: false}
   ];
+  public backupOfNotes = this.notes;
+
+  search(searchText) {
+    if (searchText === '') {
+      this.notes = this.backupOfNotes;
+    } else {
+      const searchResultNotes = [];
+      for (let i = 0; i < this.notes.length; i++) {
+        if (this.notes[i].headline.toLowerCase().indexOf(searchText) >= 0) {
+          searchResultNotes.push(this.notes[i].headline);
+        }
+      }
+      this.notes = searchResultNotes;
+    }
+  }
 
   public newNote() {
     this.notes.push( new NewNote() );
@@ -39,7 +55,6 @@ export class NotesStoreService {
     }
     delete this.notes[this.notes.length - 1];
     this.notes.length--;
-    console.log(this.notes, index);
 
     if (this._idActivatedByNoteDetails == index) {
       this.router.navigate(['not-found']);
@@ -56,5 +71,8 @@ export class NotesStoreService {
     this.notes[noteIndex].headline = headline;
     this.notes[noteIndex].content = content;
   }
-  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  public doneToggle(index) {
+    this.notes[index].isDone = !this.notes[index].isDone;
+  }
 }

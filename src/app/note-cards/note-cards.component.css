@@ -24,3 +24,7 @@
 h1 {
   font-size: 24px;
 }
+
+.done {
+  text-decoration: line-through;
+}

@@ -8,6 +8,9 @@ import {RouterModule} from '@angular/router';
 import { DeleteCardComponent } from './note-cards/delete-card/delete-card.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { NoteDoneComponent } from './note-cards/note-done/note-done.component';
+import { SearchComponent } from './note-cards/search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,10 +19,13 @@ import {FormsModule} from '@angular/forms';
     NoteDetailsComponent,
     DeleteCardComponent,
     NotFoundComponent,
+    NoteDoneComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'notes/0', pathMatch: 'full'},
       {path: 'notes/:id', component: NoteDetailsComponent},

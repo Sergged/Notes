@@ -34,7 +34,6 @@ export class NoteDetailsComponent implements OnInit, AfterContentChecked {
 
   updateNote(noteIndex) {
     this.isEdited = !this.isEdited;
-    console.log(this.editableHeadline);
     this.store.updateNote(noteIndex, this.editableHeadline.value, this.editableContent.value);
   }
 }
