@@ -1,2 +1,23 @@
-<h1>{{headlines[currentNoteId]}}</h1>
-<p>{{noteContent}}</p>
+<div (click)="isEdited = !isEdited" *ngIf="!isEdited; else editing">
+  <h1>{{headline}}</h1>
+  <p>{{noteContent}}</p>
+</div>
+
+<ng-template #editing>
+  <div class="layout">
+    <input required
+           #editableHeadline="ngModel"
+           [ngModel]="headline"
+           type="text"
+           placeholder="Headline">
+    <textarea required
+              [ngModel]="noteContent"
+              #editableContent="ngModel"
+              rows="15"
+              placeholder="Type Your Text Here"></textarea>
+    <button [disabled]="editableHeadline.invalid || editableContent.invalid"
+            (click)="updateNote(currentNoteId)">Save</button>
+    <button (click)="isEdited = !isEdited">Cancel</button>
+  </div>
+</ng-template>
+

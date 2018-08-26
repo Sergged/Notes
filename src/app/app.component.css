@@ -12,6 +12,9 @@
 }
 
 .layout > section {
-  flex-grow: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
   padding: 30px;
 }

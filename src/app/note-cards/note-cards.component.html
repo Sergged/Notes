@@ -1,5 +1,8 @@
-
+<section (click)="newNote()" class="card">
+  <h1>New Card</h1>
+</section>
 <section [routerLink]="['notes', i]" routerLinkActive="active" class="card" *ngFor="let headline of headlines; let i = index">
   <h1>{{headline}}</h1>
+<app-delete-card [noteIndex]="i"></app-delete-card>
 </section>
 

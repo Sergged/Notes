@@ -5,18 +5,26 @@ import { AppComponent } from './app.component';
 import { NoteCardsComponent } from './note-cards/note-cards.component';
 import { NoteDetailsComponent } from './note-details/note-details.component';
 import {RouterModule} from '@angular/router';
+import { DeleteCardComponent } from './note-cards/delete-card/delete-card.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoteCardsComponent,
-    NoteDetailsComponent
+    NoteDetailsComponent,
+    DeleteCardComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'notes/0', pathMatch: 'full'},
-      {path: 'notes/:id', component: NoteDetailsComponent}
+      {path: 'notes/:id', component: NoteDetailsComponent},
+      {path: 'not-found', component: NotFoundComponent},
+      {path: '**', redirectTo: 'not-found'}
     ])
   ],
   providers: [],
