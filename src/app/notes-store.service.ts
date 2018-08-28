@@ -14,22 +14,23 @@ export class NotesStoreService {
 
   // Primary store for Notes
   public notes = [
-    {headline: 'Google', content: 'bla-bla-bla', isDone: false}
+    {headline: 'Google', content: 'bla-bla-bla', isDone: false},
+    {headline: 'Apple', content: 'gop', isDone: false}
   ];
   public backupOfNotes = this.notes;
 
-  search(searchText) {
-    if (searchText === '') {
-      this.notes = this.backupOfNotes;
-    } else {
-      const searchResultNotes = [];
-      for (let i = 0; i < this.notes.length; i++) {
-        if (this.notes[i].headline.toLowerCase().indexOf(searchText) >= 0) {
-          searchResultNotes.push(this.notes[i].headline);
-        }
+  search(searchText): string[] {
+
+    const searchResultNotes = [];
+    for (let i = 0; i < this.notes.length; i++) {
+      if (this.notes[i].headline.toLowerCase().indexOf(searchText) >= 0) {
+        searchResultNotes.push(this.notes[i].headline);
+      } else {
+        searchResultNotes.push(null);
       }
-      this.notes = searchResultNotes;
     }
+    return searchResultNotes;
+
   }
 
   public newNote() {
@@ -47,6 +48,14 @@ export class NotesStoreService {
 
   public getNotesHeadline(noteIndex) {
     return this.notes[noteIndex].headline;
+  }
+
+  public getDoneList() {
+    const doneList = [];
+    for (let i = 0; i < this.notes.length; i++) {
+      doneList.push(this.notes[i].isDone);
+    }
+    return doneList;
   }
 
   public deleteNote(index) {

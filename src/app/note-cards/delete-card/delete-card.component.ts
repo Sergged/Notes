@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NotesStoreService} from '../../notes-store.service';
 
 @Component({
@@ -9,9 +9,15 @@ import {NotesStoreService} from '../../notes-store.service';
 export class DeleteCardComponent implements OnInit {
 
   @Input() noteIndex;
-  constructor(protected store: NotesStoreService) { }
+  @Output() onDelete = new EventEmitter<boolean>();
+
+  constructor(private store: NotesStoreService) { }
 
   ngOnInit() {
   }
 
+  delete() {
+    this.store.deleteNote(this.noteIndex);
+    this.onDelete.emit();
+  }
 }

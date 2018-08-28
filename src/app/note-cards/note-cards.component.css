@@ -13,6 +13,11 @@
   transition: box-shadow 0.1s ease-in;
   margin-bottom: 30px;
 }
+
+.card.none {
+  display: none;
+}
+
   .card:active {
     outline: none;
   }

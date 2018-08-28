@@ -5,9 +5,12 @@
 <section [routerLink]="['notes', i]"
          routerLinkActive="active"
          class="card"
-         *ngFor="let headline of headlines; let i = index">
+         *ngFor="let headline of headlines; let i = index"
+         [class.none]="isHiddenWhenSearch(i)">
+
+  <!--<h1 >{{headline}}</h1>-->
   <h1 [class.done]="store.notes[i].isDone">{{headline}}</h1>
   <app-note-done [noteIndex]="i"></app-note-done>
-  <app-delete-card [noteIndex]="i"></app-delete-card>
+  <app-delete-card [noteIndex]="i" (onDelete)="refreshList()"></app-delete-card>
 </section>
 
