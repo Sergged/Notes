@@ -1,0 +1,25 @@
+input {
+  padding-top: 0.67em;
+  padding-bottom: 0.67em;
+  border: none;
+  border-bottom: 1px solid gray;
+  transition: box-shadow 0.1s ease-in;
+}
+
+input:focus {
+  box-shadow: 5px 5px black;
+  outline: none;
+  border: none;
+}
+
+button {
+  margin-left: 10px;
+  background-color: transparent;
+  border: 1px solid gray;
+  padding: 0.67em;
+  transition: transform 0.1s ease-in;
+}
+
+button:active {
+  transform: translateY(1px);
+}

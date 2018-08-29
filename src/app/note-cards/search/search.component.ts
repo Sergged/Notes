@@ -15,14 +15,17 @@ export class SearchComponent implements OnInit {
 
   public searchResults: string[];
   search() {
+    setTimeout(() => {
+      const querySearchValue = this.searchText.nativeElement.value.toLowerCase();
+      let resetSearch = false;
 
-    const querySearchValue = this.searchText.nativeElement.value.toLowerCase();
-    let resetSearch = false;
-
-    this.searchService.push( this.store.search( querySearchValue ) );
-    if (querySearchValue == '') { resetSearch = true; }
-    //Работае и с reset и без, почему?
-    this.router.navigate(['not-found'], { queryParams: {'refresh': true, 'search': !resetSearch} });
+      this.searchService.push(this.store.search(querySearchValue));
+      if (querySearchValue == '') {
+        resetSearch = true;
+      }
+      // Работает и с reset и без, почему?
+      this.router.navigate(['not-found'], {queryParams: {'refresh': true, 'search': !resetSearch}});
+    }, 0);
 
   }
   ngOnInit() {

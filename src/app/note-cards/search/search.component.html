@@ -1,1 +1,4 @@
-<input #searchText type="text" (keydown.enter)="search()" placeholder="Search">
+<form action="">
+  <input #searchText type="text" (keydown.enter)="search()" placeholder="Search">
+  <button type="reset" (click)="search()">Reset</button>
+</form>

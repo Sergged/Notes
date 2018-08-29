@@ -20,28 +20,34 @@ export class NoteCardsComponent implements OnInit {
   newNote() {
     this.router.navigate(['notes', this.store.newNote()]);
     this.refreshList();
+    // this.searchResultHeadlines = this.headlines;
   }
 
   refreshList() {
-      this.searchResultHeadlines = this.searchService.get();
+    this.headlines = this.store.getNotesHeadlines();
 
-      this.headlines = this.store.getNotesHeadlines();
+    this.searchResultHeadlines = this.headlines;
   }
 
   isHiddenWhenSearch(index) {
-    const temp = !(this.headlines[index] == this.searchResultHeadlines[index]);
-    console.log(temp);
-    return temp;
+    return !(this.headlines[index] == this.searchResultHeadlines[index]);
   }
 
   ngOnInit() {
     this.refreshList();
+    // this.searchResultHeadlines = this.headlines;
 
     this.route.queryParams.subscribe(
       qp => {
         if (qp.refresh === 'true') {
           this.refreshList();
         }
+        if (qp.search === 'true') {
+          this.searchResultHeadlines = this.searchService.get();
+        }
+        // else {
+        //   this.searchResultHeadlines = this.headlines;
+        // }
       }
     );
   }
