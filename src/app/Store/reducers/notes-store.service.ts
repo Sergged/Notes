@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {INote} from './inote';
-import {NewNote} from './new-note';
+import {INote} from './models/inote';
+import {NewNote} from './Store/reducers/new-note';
 import {RemoteNotesService} from './remote-notes.service';
 
 @Injectable({

@@ -1,4 +1,4 @@
-import {INote} from './inote';
+import {INote} from './models/inote';
 
 export class NewNote implements INote {
   public headline = 'Headline';
