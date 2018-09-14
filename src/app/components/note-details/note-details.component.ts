@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NotesStoreService} from '../notes-store.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Store } from '@ngrx/store';
+import { INote } from '../../models/inote';
 
 @Component({
   selector: 'app-note-details',
@@ -9,7 +10,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class NoteDetailsComponent implements OnInit {
 
-  constructor(private store: NotesStoreService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private store: Store<{notesStore: {notes: INote[]}}>) { }
 
   @ViewChild('editableHeadline') editableHeadline;
   @ViewChild('editableContent') editableContent;
@@ -18,22 +21,28 @@ export class NoteDetailsComponent implements OnInit {
   public currentNoteId;
   public noteContent;
   public headline;
+  public notesState;
+  public notes;
 
   ngOnInit() {
+    this.notesState = this.store.select('notesStore');
+    this.notesState.subscribe(data => {
+      this.notes = data.notes;
+    });
     this.route.params.subscribe(
       params => {
         this.currentNoteId = params.id;
-        this.headline = this.store.getNotesHeadline(this.currentNoteId);
-        this.noteContent = this.store.getNoteContent(this.currentNoteId);
+        this.headline = this.notes[this.currentNoteId].headline;
+        this.noteContent = this.notes[this.currentNoteId].content;
       }
     );
+
   }
 
   updateNote(noteIndex) {
     this.isEdited = !this.isEdited;
     this.headline = this.editableHeadline.value;
     this.noteContent = this.editableContent.value;
-    this.store.updateNote(noteIndex, this.editableHeadline.value, this.editableContent.value);
     this.router.navigate([], { queryParams: {'refresh': true} });
   }
 }

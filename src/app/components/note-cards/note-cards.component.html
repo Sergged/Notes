@@ -1,16 +1,14 @@
 <section (click)="newNote()" class="card">
   <h1>New Card</h1>
 </section>
-<app-search></app-search>
-<section [routerLink]="['notes', i]"
-         routerLinkActive="active"
-         class="card"
-         *ngFor="let headline of headlines; let i = index"
-         [class.none]="isHiddenWhenSearch(i)">
+<!--<app-search></app-search>-->
+<section class="card"
+         *ngFor="let note of (notesState | async).notes; let i = index"
+         (click)='lookUpNote(i)'>
 
-  <!--<h1 >{{headline}}</h1>-->
-  <h1 [class.done]="store.notes[i].isDone">{{headline}}</h1>
-  <app-note-done [noteIndex]="i"></app-note-done>
-  <app-delete-card [noteIndex]="i" (onDelete)="refreshList()"></app-delete-card>
+  <h1 [class.done]="">{{ note.headline }}</h1>
+  <!--<app-note-done [noteIndex]="i"></app-note-done>-->
+  <!--<app-delete-card [noteIndex]="i" (onDelete)="refreshList()"></app-delete-card>-->
 </section>
+<button (click)="test()">Console.log</button>
 
